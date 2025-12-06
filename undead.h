@@ -43,10 +43,13 @@ public:
 class UndeadAdapter : public Character {
     shared_ptr<Undead> undead;
 public:
-    UndeadAdapter(shared_ptr<Undead> u) { 
+    UndeadAdapter(shared_ptr<Undead> u, CharacterType t) : undead(std::move(u)){ 
         /* TODO */
+        type  = t;
+        description = undead->name();
+    
     }
-    int getAttack() const override { /* TODO */ return 0; }
-    int getSpeed() const override { /* TODO */ return 0; }
-    int getDefense() const override { /* TODO */ return 0; }
+    int getAttack() const override { return undead->power(); }
+    int getSpeed() const override { return undead->agility(); }
+    int getDefense() const override { return undead->endurance(); }
 };
